@@ -14,7 +14,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get autoremove -yq
 
 # The server runs as the "steam" user from the base image.
-# It is therefore required to set correct permissions for the server foler.
+# It is therefore required to set correct permissions for the server folder.
 RUN mkdir -p /server/AbioticFactor/Saved && chown -R ${USER}:${USER} /server
 VOLUME [ "/server/AbioticFactor/Saved" ]
 VOLUME [ "/server" ]
@@ -22,7 +22,7 @@ VOLUME [ "/server" ]
 # Switch back to the "steam" user.
 USER ${USER}
 
-# Setup entrypoint
+# Set up entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["bash", "/entrypoint.sh"]
 
