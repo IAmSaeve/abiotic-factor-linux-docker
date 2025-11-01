@@ -1,10 +1,13 @@
 services:
   abiotic-server:
-    image: "ghcr.io/pleut/abiotic-factor-linux-docker:latest"
-    restart: unless-stopped
+    image: "ghcr.io/iamsaeve/abiotic-factor-linux-docker:latest"
+    container_name: abiotic-server
+    hostname: abiotic-server
+    restart: always
+    user: "1000:1000" # UID and GID for the "steam" user from the base image
     volumes:
-      - "./gamefiles:/server"
-      - "./data:/server/AbioticFactor/Saved"
+      - "gamefiles:/server"
+      - "data:/server/AbioticFactor/Saved"
     environment:
       - MaxServerPlayers=6
       - Port=7777
@@ -14,8 +17,12 @@ services:
       - UsePerfThreads=true
       - NoAsyncLoadingThread=true
       - WorldSaveName=Cascade
-#     - AutoUpdate=true
-#     - AdditionalArgs=-SandboxIniPath=Config/WindowsServer/Server1Sandbox.ini
+      # - AutoUpdate=true
+      # - AdditionalArgs=-SandboxIniPath=Config/WindowsServer/Server1Sandbox.ini
     ports:
-      - "0.0.0.0:7777:7777/udp"
-      - "0.0.0.0:27015:27015/udp"
+      - "7777:7777/udp"
+      - "27015:27015/udp"
+
+volumes:
+  gamefiles: {}
+  data: {}

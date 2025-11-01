@@ -1,17 +1,31 @@
-FROM ubuntu:22.04
+# https://github.com/CM2Walki/steamcmd
+# Root image is needed to install extra dependencies.
+FROM docker.io/cm2network/steamcmd:root
 
+# Disables a few prompts that could stall image builds.
+# https://manpages.debian.org/bullseye/debconf-doc/debconf.7.en.html#noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies and run cleanup
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    echo steam steam/question select "I AGREE" | debconf-set-selections && \
-    echo steam steam/license note '' | debconf-set-selections && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y wine64 steamcmd && \
+    apt-get install -yq --install-recommends wine64 xvfb && \
     apt-get clean autoclean && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get autoremove -yq
 
-ENV PATH="$PATH:/usr/games"
+# The server runs as the "steam" user from the base image.
+# It is therefore required to set correct permissions for the server foler.
+RUN mkdir -p /server/AbioticFactor/Saved && chown -R ${USER}:${USER} /server
+VOLUME [ "/server/AbioticFactor/Saved" ]
+VOLUME [ "/server" ]
 
-WORKDIR /steamcmd
+# Switch back to the "steam" user.
+USER ${USER}
 
+# Setup entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["bash", "/entrypoint.sh"]
+
+# Use these for development if the container is crashing.
+# ENTRYPOINT [ "tail" ]
+# SHELL [ "/bin/bash" ]
