@@ -17,10 +17,11 @@ services:
       - Port=7777
       - QueryPort=27015
       - ServerPassword=123
-      - SteamServerName='Local Dev Server'
+      - SteamServerName=Local Dev Server
       - UsePerfThreads=true
       - NoAsyncLoadingThread=true
       - WorldSaveName=dev
+      - AdditionalArgs=-AdminPassword=321 -log -newconsole
       # - AutoUpdate=true
     ports:
       - "7777:7777/udp"
