@@ -113,7 +113,7 @@ docker run --name abiotic-server \
    -e Port=7777 \
    -e QueryPort=27015 \
    -e ServerPassword=ChangeThisPasswordPlease \
-   -e "SteamServerName=Linux Server" \
+   -e SteamServerName=LinuxServer \
    -e UsePerfThreads=true \
    -e NoAsyncLoadingThread=true \
    -e WorldSaveName=MyWorldSave \
