@@ -135,10 +135,10 @@ There are two ways to update the game server:
 
 ### Updating the container
 
-Sometimes, changes to this container image are necessary. To apply these:
-
-1. Merge the content of `docker-compose.yml` with any changes made from [`docker-compose.yml.example`](docker-compose.yml.example).
-2. Run `docker compose pull` to download an updated version of the container image.
+1. Check for changes to the [Docker Compose section](#docker-compose) to align with your local install
+2. Run `docker compose pull`, or pull directly `docker pull ghcr.io/iamsaeve/abiotic-factor-linux-docker:latest` to download an updated version of the container image
+3. Stop the server `docker compose down` or `docker stop abiotic-server`
+4. Start the server using the methid you chose to install with, eg. `docker compose up -d`
 
 ## Configuration
 
