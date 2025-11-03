@@ -30,9 +30,9 @@ fi
 MaxServerPlayers="${MaxServerPlayers:-6}"
 Port="${Port:-7777}"
 QueryPort="${QueryPort:-27015}"
-ServerPassword="${ServerPassword:-password}"
+ServerPassword="${ServerPassword:-ChangeThisPasswordPlease}"
 SteamServerName="${SteamServerName:-LinuxServer}"
-WorldSaveName="${WorldSaveName:-Cascade}"
+WorldSaveName="${WorldSaveName:-MyWorldSave}"
 AdditionalArgs="${AdditionalArgs:-}"
 AutoUpdate="${AutoUpdate:-"false"}"
 

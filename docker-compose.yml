@@ -1,0 +1,31 @@
+# This compose file is used for local development to test features before their published to the public feed.
+# Unless doing development locally, don't use this file.
+
+---
+services:
+  abiotic-server:
+    build: .
+    container_name: abiotic-server-dev
+    hostname: abiotic-server-dev
+    restart: unless-stopped
+    user: "1000:1000"
+    volumes:
+      - "gamefiles:/server"
+      - "data:/server/AbioticFactor/Saved"
+    environment:
+      - MaxServerPlayers=1
+      - Port=7777
+      - QueryPort=27015
+      - ServerPassword=123
+      - SteamServerName='Local Dev Server'
+      - UsePerfThreads=true
+      - NoAsyncLoadingThread=true
+      - WorldSaveName=dev
+      # - AutoUpdate=true
+    ports:
+      - "7777:7777/udp"
+      - "27015:27015/udp"
+
+volumes:
+  gamefiles: {}
+  data: {}
