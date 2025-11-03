@@ -49,9 +49,16 @@ fi
 
 pushd /server/AbioticFactor/Binaries/Win64 > /dev/null
 
-# xvfb-run is used to fix certain Wine errors since it expects a display server to be available
-xvfb-run wine AbioticFactorServer-Win64-Shipping.exe $SetUsePerfThreads$SetNoAsyncLoadingThread-MaxServerPlayers=$MaxServerPlayers \
-    -PORT=$Port -QueryPort=$QueryPort -ServerPassword=$ServerPassword \
-    -SteamServerName="$SteamServerName" -WorldSaveName="$WorldSaveName" -tcp $AdditionalArgs
+wine AbioticFactorServer-Win64-Shipping.exe \
+    $SetUsePerfThreads \
+    $SetNoAsyncLoadingThread \
+    -MaxServerPlayers=$MaxServerPlayers \
+    -PORT=$Port \
+    -QueryPort=$QueryPort \
+    -ServerPassword=$ServerPassword \
+    -SteamServerName="$SteamServerName" \
+    -WorldSaveName="$WorldSaveName" \
+    -tcp \
+    $AdditionalArgs
 
 popd > /dev/null

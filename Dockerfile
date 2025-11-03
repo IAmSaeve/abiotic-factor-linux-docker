@@ -7,9 +7,8 @@ FROM docker.io/cm2network/steamcmd:root
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies and run cleanup
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -yq --install-recommends wine64 xvfb && \
+RUN apt-get update && \
+    apt-get install -yq --install-recommends wine64 && \
     apt-get clean autoclean && \
     apt-get autoremove -yq
 
@@ -22,10 +21,14 @@ VOLUME [ "/server" ]
 # Switch back to the "steam" user.
 USER ${USER}
 
+# Setup Wine prefix
+ENV WINEDEBUG=-all WINEPREFIX=${HOMEDIR}/.wine WINEARCH=win64
+RUN wineboot --init --end-session
+
 # Set up entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["bash", "/entrypoint.sh"]
 
 # Use these for development if the container is crashing.
-# ENTRYPOINT [ "tail" ]
+# CMD ["tail", "-f", "/dev/null"]
 # SHELL [ "/bin/bash" ]
