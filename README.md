@@ -5,7 +5,7 @@
 > THIS REPO IS NOT COMPATIBLE WITH THE ORIGINAL REPO.<br>
 > You cannot do in-place upgrade from the original repo to this.<br>
 > The original server was running as `root` while this is running as `steam`<br>
-> This means that files previously creadted will have wrong permissions leading to container startup failure.
+> This means that files previously created will have wrong permissions leading to container startup failure.
 
 For operating a dedicated Abiotic Factor server in Docker.<br>
 The container uses [Wine](https://www.winehq.org/) to run the, Windows only, server under Linux.
