@@ -1,6 +1,6 @@
 # https://github.com/CM2Walki/steamcmd
 # Root image is needed to install extra dependencies.
-FROM docker.io/cm2network/steamcmd:root
+FROM docker.io/cm2network/steamcmd:root-trixie
 
 # Disables a few prompts that could stall image builds.
 # https://manpages.debian.org/bullseye/debconf-doc/debconf.7.en.html#noninteractive
